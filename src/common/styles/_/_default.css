@@ -1,0 +1,13 @@
+body {
+  color: var(--secondary-text);
+  background-color: var(--bg-color);
+}
+
+h1,
+span,
+input,
+button,
+li {
+  font-family: "Futura PT";
+  font-weight: 600;
+}

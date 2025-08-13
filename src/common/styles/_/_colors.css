@@ -1,0 +1,11 @@
+:root {
+  --light: #fff;
+  --primary-left: 255 111 0;
+  --primary-right: 255 168 0;
+  --primary-text: #fff;
+  --secondary-text: #272727;
+  --bg-color: #e5e5e5;
+  --gray: 128 128 128;
+  --gray-text: #acacac;
+  --overlay: #353647cc;
+}
