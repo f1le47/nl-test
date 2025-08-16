@@ -35,6 +35,7 @@ const hasText = computed(() => model.value && model.value.length > 0);
 
 .input {
   padding: 12px;
+  padding-right: 50px;
   width: 100%;
   font-size: 18px;
   font-weight: 400;
@@ -42,6 +43,7 @@ const hasText = computed(() => model.value && model.value.length > 0);
   border: 1px solid rgb(var(--gray) / 0.5);
   border-radius: 5px;
   box-sizing: border-box;
+  text-overflow: ellipsis;
 }
 
 .input:hover,
