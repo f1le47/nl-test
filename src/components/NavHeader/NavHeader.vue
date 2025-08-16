@@ -4,6 +4,7 @@ import LocationIcon from "@/assets/icons/location.svg?component";
 import { useLocationStore } from "@/stores/location/locationStore";
 import ChooseLocationModal from "./components/ChooseLocationModal.vue";
 import { onMounted, ref } from "vue";
+import SkeletonUI from "@/ui/SkeletonUI.vue";
 
 const locationStore = useLocationStore();
 
@@ -22,7 +23,8 @@ onMounted(() => {
     <ContainerUI>
       <div class="header-location" @click="openLocationModal">
         <LocationIcon class="header-location__icon" />
-        <span class="header-location__text">{{ locationStore.city?.city }}</span>
+        <SkeletonUI v-if="locationStore.isCityLoading" class="header-location__skeleton" />
+        <span v-else class="header-location__text">{{ locationStore.city?.city }}</span>
       </div>
       <ChooseLocationModal ref="locationModalRef" />
     </ContainerUI>
@@ -52,5 +54,10 @@ onMounted(() => {
 .header-location__text {
   font-size: 15px;
   line-height: 24px;
+}
+
+.header-location__skeleton {
+  width: 88px;
+  height: 24px;
 }
 </style>

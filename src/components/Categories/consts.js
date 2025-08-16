@@ -1,0 +1,3 @@
+export const CATEGORIES_MIN_CARD_WIDTH = 271;
+export const CATEGORIES_CARD_HEIGHT = 152;
+export const CATEGORIES_GAP = 22;

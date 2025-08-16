@@ -1,9 +1,13 @@
 <script setup>
-const { isDisabled } = defineProps(["isDisabled"]);
+const { isDisabled, textStyle, className } = defineProps(["isDisabled", "textStyle", "className"]);
 </script>
 
 <template>
-  <button class="button" :disabled="isDisabled">
+  <button
+    class="button"
+    :class="{ button_uppercase: textStyle === 'uppercase', [className]: className }"
+    :disabled="isDisabled"
+  >
     <slot></slot>
   </button>
 </template>
@@ -21,7 +25,6 @@ const { isDisabled } = defineProps(["isDisabled"]);
     rgb(var(--primary-right) / 1) 100%
   );
   border-radius: 24px;
-  letter-spacing: 1.75px;
   cursor: pointer;
   z-index: 0;
 }
@@ -60,5 +63,10 @@ const { isDisabled } = defineProps(["isDisabled"]);
 
 .button:disabled:hover::before {
   opacity: 0;
+}
+
+.button_uppercase {
+  letter-spacing: 1.75px;
+  text-transform: uppercase;
 }
 </style>

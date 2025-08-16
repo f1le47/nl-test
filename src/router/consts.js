@@ -1,3 +1,9 @@
 export const PATHS = {
-  Categories: "/category",
+  Categories: {
+    path: "/category",
+  },
+  Category: {
+    path: "/category",
+    slug: "/:slug",
+  },
 };

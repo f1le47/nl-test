@@ -1,0 +1,5 @@
+export const PRODUCTS_MIN_CARD_WIDTH = 271;
+export const PRODUCTS_CARD_HEIGHT = 152;
+export const PRODUCTS_GAP = 22;
+
+export const SUBCATEGORIES_SKELETONS_AMOUNT = 4;

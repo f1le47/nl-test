@@ -27,6 +27,7 @@ const isActive = computed(() => isHovered.value || isFocused.value || isHintsHov
       :is-active="isActive"
       v-bind="rest"
     />
+    <div class="separator"></div>
     <ul
       v-if="hints && hints.length > 0 && !isValid"
       class="hints"
@@ -34,7 +35,6 @@ const isActive = computed(() => isHovered.value || isFocused.value || isHintsHov
       @mouseleave="isHintsHovered = false"
       :class="{ hints_active: isActive }"
     >
-      <div class="hints__separator"></div>
       <li v-for="hint in hints" :key="hint" class="hints__hint" @click="handleChooseHint(hint)">
         {{ hint }}
       </li>
@@ -48,12 +48,17 @@ const isActive = computed(() => isHovered.value || isFocused.value || isHintsHov
   width: 100%;
 }
 
+.wrapper:not(:has(.hints)) .separator {
+  display: none;
+}
+
 .hints {
-  padding: 12px;
-  padding-top: 5px;
+  padding: 17px;
   position: absolute;
   top: calc(100% - 5px);
   width: 100%;
+  max-height: calc(32px * 5 + 25px);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   row-gap: 7px;
@@ -62,6 +67,11 @@ const isActive = computed(() => isHovered.value || isFocused.value || isHintsHov
   border-top: 0;
   border-radius: 0 0 5px 5px;
   box-sizing: border-box;
+  z-index: 1;
+}
+
+.hints::-webkit-scrollbar {
+  width: 0;
 }
 
 .hints_active,
@@ -69,11 +79,15 @@ const isActive = computed(() => isHovered.value || isFocused.value || isHintsHov
   border-color: var(--secondary-text);
 }
 
-.hints__separator {
-  margin-bottom: 5px;
-  width: 100%;
+.separator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
   height: 2px;
   background-color: rgb(var(--gray) / 0.3);
+  z-index: 2;
 }
 
 .hints__hint {

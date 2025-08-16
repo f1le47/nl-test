@@ -7,9 +7,13 @@ import { local } from "@/common/storages/local";
 export const useLocationStore = defineStore("location", () => {
   const city = ref();
   const cities = ref([]);
+  const isCityLoading = ref(false);
 
   const getCitiesByTerm = async (term) => {
-    if (term.length < 2) return;
+    if (term.length < 3) {
+      cities.value = [];
+      return;
+    }
     try {
       const data = (await locationApi.getCitiesByTerm({ term })).data;
       cities.value = data;
@@ -19,12 +23,16 @@ export const useLocationStore = defineStore("location", () => {
   };
   const getCity = async (id) => {
     try {
+      isCityLoading.value = true;
+
       let cityId = (id ? id : local.locationStorage.cityId) ?? DEFAULT_CITY_ID;
 
       const data = (await locationApi.getCityById({ id: cityId })).data;
       city.value = data;
     } catch (err) {
       console.error("Ошибка", err);
+    } finally {
+      isCityLoading.value = false;
     }
   };
   const saveCity = (newCity) => {
@@ -32,5 +40,5 @@ export const useLocationStore = defineStore("location", () => {
     city.value = newCity;
   };
 
-  return { city, cities, getCitiesByTerm, saveCity, getCity };
+  return { city, cities, getCitiesByTerm, saveCity, getCity, isCityLoading };
 });

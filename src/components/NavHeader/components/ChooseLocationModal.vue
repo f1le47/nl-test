@@ -11,7 +11,10 @@ const locationStore = useLocationStore();
 
 const isOpen = ref(false);
 const openModal = () => (isOpen.value = true);
-const closeModal = () => (isOpen.value = false);
+const closeModal = () => {
+  isOpen.value = false;
+  search.value = "";
+};
 
 const search = ref("");
 const debouncedSearch = debounce((value) => {
@@ -46,7 +49,13 @@ defineExpose({
           v-model="search"
           placeholder="Например, Санкт-петербург"
         />
-        <ButtonUI :is-disabled="!chosenCity" @click="handleConfirm">ПОДТВЕРДИТЬ</ButtonUI>
+        <ButtonUI
+          :is-disabled="!chosenCity"
+          @click="handleConfirm"
+          class-name="modal-search__button"
+          text-style="uppercase"
+          >Подтвердить</ButtonUI
+        >
       </div>
       <CloseIcon class="modal__close" @click="closeModal" />
     </div>
@@ -76,7 +85,7 @@ defineExpose({
   width: 100%;
   display: flex;
   align-items: center;
-  column-gap: 18px;
+  gap: 18px;
 }
 
 .modal__close {
@@ -87,5 +96,15 @@ defineExpose({
   height: 16px;
   color: rgb(var(--gray));
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-search {
+    flex-direction: column;
+  }
+
+  .modal-search__button {
+    width: 100%;
+  }
 }
 </style>
